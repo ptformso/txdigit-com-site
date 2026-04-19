@@ -1,91 +1,539 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TxDigit</title>
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: #e2e8f0;
-}
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 60px 20px;
-}
-h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
-    color: #38bdf8;
-}
-.tagline {
-    font-size: 18px;
-    color: #94a3b8;
-    margin-bottom: 40px;
-}
-.section {
-    margin-bottom: 40px;
-}
-.section h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #22c55e;
-}
-.section p {
-    line-height: 1.6;
-}
-.footer {
-    margin-top: 60px;
-    font-size: 14px;
-    color: #64748b;
-}
-a {
-    color: #38bdf8;
-    text-decoration: none;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TxDigit | Digital Presence, Data Systems, and Web Infrastructure</title>
+  <meta name="description" content="TxDigit is an independent consultancy working across digital presence, domain strategy, data systems, and lightweight web infrastructure." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <meta property="og:title" content="TxDigit" />
+  <meta property="og:description" content="Enabling transformation through digital systems." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #111c33;
+      --text: #e5edf7;
+      --muted: #9aa8bf;
+      --line: rgba(148,163,184,0.2);
+      --accent: #38bdf8;
+      --max: 1160px;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      padding: 24px 0;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid rgba(17,17,17,0.08);
+      padding-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-mark {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-note {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav a:hover,
+    .email-link:hover,
+    .text-link:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 42px 0 28px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, #0b1220, #0f172a);
+      border: 1px solid rgba(56,189,248,0.25);
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      padding: 64px 56px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 4.7rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      max-width: 760px;
+    }
+
+    .hero-subline {
+      margin: 20px 0 0;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--accent);
+      font-weight: 500;
+      max-width: 760px;
+    }
+
+    .hero-copy {
+      margin: 26px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .button,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .button {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .button-secondary {
+      background: transparent;
+      border-color: rgba(17,17,17,0.12);
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(29,59,102,0.28);
+      color: var(--accent);
+    }
+
+    .section {
+      padding: 26px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid rgba(17,17,17,0.07);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px 30px;
+    }
+
+    .section-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.5rem, 2.4vw, 2.15rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    .lead,
+    .muted {
+      color: var(--muted);
+    }
+
+    .service-list,
+    .focus-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .service-item,
+    .focus-item {
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .service-item:first-child,
+    .focus-item:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .service-title,
+    .focus-title {
+      margin: 0 0 6px;
+      font-size: 1.04rem;
+      font-weight: 700;
+    }
+
+    .service-text,
+    .focus-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .principle {
+      background: #0b1220;
+      border: 1px solid rgba(148,163,184,0.25);
+      border-radius: 16px;
+      padding: 22px 18px;
+    }
+
+    .principle strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .principle span {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-line {
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-line:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .contact-label {
+      display: block;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .contact-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .footer {
+      padding: 26px 0 44px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-inner {
+      border-top: 1px solid rgba(17,17,17,0.08);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .grid-2,
+      .principles {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-card,
+      .panel {
+        padding: 28px 22px;
+      }
+
+      .hero {
+        padding-top: 20px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button,
+      .button-secondary {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <h1>TxDigit</h1>
-    <div class="tagline">Enabling transformation through digital systems.</div>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">TxDigit</div>
+        <div class="brand-note">Independent digital and data systems consultancy</div>
+      </div>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#focus">Focus Areas</a>
+        <a href="#approach">Approach</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <div class="section">
-        <h2>About</h2>
-        <p>
-        TxDigit is a focused consultancy working across digital presence, web identity, 
-        and data-driven platform design. We help organizations build structured, scalable, 
-        and practical digital systems.
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-card">
+          <div class="eyebrow">TxDigit</div>
+          <h1>Digital presence, data systems, and practical web infrastructure.</h1>
+          <p class="hero-subline">Enabling transformation through digital systems.</p>
+          <p class="hero-copy">
+            TxDigit is a focused consultancy working across digital presence strategy, domain-led web identity,
+            structured data systems, directory and listing architecture, and lightweight web deployment. We help shape
+            practical digital structures that are clear, scalable, and useful.
+          </p>
+          <div class="hero-actions">
+            <a class="button-secondary" href="mailto:info@txdigit.com">Contact TxDigit</a>
+            <a class="button-secondary" href="#services">Explore Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap grid-2">
+        <div class="panel">
+          <div class="section-label">What we do</div>
+          <h2>Focused consulting across digital identity, data structure, and web delivery.</h2>
+          <p class="lead">
+            We work on practical digital foundations rather than unnecessary complexity—helping organizations improve
+            how they are discovered, understood, and reached online.
+          </p>
+
+          <div class="service-list">
+            <div class="service-item">
+              <p class="service-title">Digital Presence Consultancy</p>
+              <p class="service-text">Advising on structure, clarity, discoverability, and the overall shape of digital presence.</p>
+            </div>
+            <div class="service-item">
+              <p class="service-title">Domain &amp; Web Identity Strategy</p>
+              <p class="service-text">Supporting domain-led positioning, redirect architecture, and entry-point design for web visibility.</p>
+            </div>
+            <div class="service-item">
+              <p class="service-title">Data &amp; Analytics Consulting</p>
+              <p class="service-text">Structuring information, reporting flows, and lightweight analytics systems for practical decision support.</p>
+            </div>
+            <div class="service-item">
+              <p class="service-title">Directory &amp; Platform Architecture</p>
+              <p class="service-text">Designing scalable listing, search, and information systems for specialized sectors and focused use cases.</p>
+            </div>
+            <div class="service-item">
+              <p class="service-title">Static Sites &amp; Lightweight Deployments</p>
+              <p class="service-text">Building fast, maintainable web pages and low-overhead deployment structures for practical use.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel" id="focus">
+          <div class="section-label">Selected focus areas</div>
+          <h2>Designed for clarity, maintainability, and real-world utility.</h2>
+          <p class="muted">
+            Our work tends to sit at the intersection of communication, structure, and systems—where digital presence
+            needs to be both credible and operationally practical.
+          </p>
+
+          <div class="focus-list">
+            <div class="focus-item">
+              <p class="focus-title">Professional and sector-specific web presence</p>
+              <p class="focus-text">Helping focused businesses and initiatives present themselves with clarity and credibility online.</p>
+            </div>
+            <div class="focus-item">
+              <p class="focus-title">Regional and city-level digital platforms</p>
+              <p class="focus-text">Supporting structured local or regional web initiatives where identity and discoverability matter.</p>
+            </div>
+            <div class="focus-item">
+              <p class="focus-title">Structured data and information architecture</p>
+              <p class="focus-text">Shaping data models and information layers that remain usable as systems grow over time.</p>
+            </div>
+            <div class="focus-item">
+              <p class="focus-title">Domain routing and entry-point design</p>
+              <p class="focus-text">Creating clean user paths from domain to destination with simple and maintainable routing logic.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="wrap panel">
+        <div class="section-label">How we work</div>
+        <h2>Practical systems over unnecessary complexity.</h2>
+        <p class="lead">
+          Our preference is for clear structure, fast deployment, maintainable architecture, and disciplined scope. The
+          aim is to build digital systems that are usable, understandable, and capable of supporting real business goals.
         </p>
-    </div>
 
-    <div class="section">
-        <h2>What We Do</h2>
-        <p>
-        Digital presence consulting, domain strategy, data analytics, directory platform architecture, 
-        and lightweight web deployment systems.
-        </p>
-    </div>
+        <div class="principles">
+          <div class="principle">
+            <strong>Clarity</strong>
+            <span>Simple structures, legible communication, and better user pathways.</span>
+          </div>
+          <div class="principle">
+            <strong>Practicality</strong>
+            <span>Solutions designed for use, maintenance, and real operating constraints.</span>
+          </div>
+          <div class="principle">
+            <strong>Scalability</strong>
+            <span>Foundations that can extend without becoming unnecessarily fragile.</span>
+          </div>
+          <div class="principle">
+            <strong>Restraint</strong>
+            <span>Focused scope, lightweight delivery, and disciplined system design.</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="section">
-        <h2>Approach</h2>
-        <p>
-        We prioritize clarity, speed, and maintainability — building systems that are easy to deploy, 
-        manage, and evolve over time.
-        </p>
-    </div>
+    <section class="section" id="contact">
+      <div class="wrap grid-2">
+        <div class="panel contact-card">
+          <div>
+            <div class="section-label">Contact</div>
+            <h2>Project and consulting inquiries.</h2>
+            <p class="lead">
+              For consulting discussions, collaboration, or project-related communication, please use the contact details below.
+            </p>
+          </div>
 
-    <div class="section">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:info@txdigit.com">info@txdigit.com</a></p>
-    </div>
+          <div class="contact-line">
+            <span class="contact-label">Email</span>
+            <div class="contact-value"><a class="email-link" href="mailto:info@txdigit.com">info@txdigit.com</a></div>
+          </div>
 
-    <div class="footer">
-        © TxDigit
+          <div class="contact-line">
+            <span class="contact-label">Scope</span>
+            <div class="contact-value">Digital presence, domain strategy, data systems, and lightweight web platforms</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-label">Positioning</div>
+          <h2>A compact digital and data systems consultancy.</h2>
+          <p class="lead">
+            TxDigit operates across digital identity, platform structure, and data-backed web systems—helping shape more
+            effective digital presence through practical, structured approaches.
+          </p>
+          <p class="muted">
+            This site is intentionally concise. It serves as a direct reference point for TxDigit’s advisory and systems-oriented work.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>© <span id="year"></span> TxDigit. All rights reserved.</div>
+      <div>Independent digital presence and data systems consultancy.</div>
     </div>
-</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
